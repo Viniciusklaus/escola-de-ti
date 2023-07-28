@@ -8,9 +8,6 @@ export type UserDocument = HydratedDocument<Product>;
 @Schema()
 export class Product {
     @Prop({ required: true })
-    @IsNotEmpty()
-    @MaxLength(50)
-    @MinLength(2)
     name: string;
 
     @Prop({ required: true })

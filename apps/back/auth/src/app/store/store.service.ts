@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { Store } from './entities/store.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class StoreService {
+  constructor(@InjectModel(Store.name) private storeModel: Model<Store>) { }
   create(createStoreDto: CreateStoreDto) {
-    return 'This action adds a new store';
+    const creadedstore = this.storeModel.create(createStoreDto)
+    return creadedstore;
   }
 
   findAll() {
-    return `This action returns all store`;
+    const findedall = this.storeModel.find()
+    return findedall;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} store`;
+  findOne(id: string) {
+    const findedone = this.storeModel.findById(id)
+    return findedone;
   }
 
-  update(id: number, updateStoreDto: UpdateStoreDto) {
-    return `This action updates a #${id} store`;
+  update(id: string, updateStoreDto: UpdateStoreDto) {
+
+    let store = this.findOne(id)
+    
+    console.log(store)
+    return this.storeModel.findByIdAndUpdate(id, updateStoreDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} store`;
+  remove(id: string) {
+    const removed = this.storeModel.findByIdAndRemove(id)
+    return removed;
   }
 }

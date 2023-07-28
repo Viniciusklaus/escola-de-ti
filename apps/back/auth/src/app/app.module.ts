@@ -13,6 +13,7 @@ import { StoreModule } from './store/store.module';
     AuthModule,
     UsersModule,
     ProductModule,
+    StoreModule,
     MongooseModule.forRoot('mongodb://0.0.0.0:27017/nest'),
     StoreModule,
   ],

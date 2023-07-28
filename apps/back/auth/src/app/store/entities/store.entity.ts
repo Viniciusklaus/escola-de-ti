@@ -8,12 +8,9 @@ export type UserDocument = HydratedDocument<Store>;
 @Schema()
 export class Store {
     @Prop({ required: true })
-    @IsNotEmpty()
-    @MaxLength(50)
-    @MinLength(2)
     name: string;
 
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'product' }] })
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] })
     products: Product[];
 
     @Prop()
@@ -21,4 +18,4 @@ export class Store {
 
 }
 
-export const ProductSchema = SchemaFactory.createForClass(Store);
+export const StoreSchema = SchemaFactory.createForClass(Store);
